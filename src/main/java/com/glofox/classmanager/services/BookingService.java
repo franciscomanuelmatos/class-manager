@@ -32,7 +32,7 @@ public class BookingService {
     }
 
     public BookingDTO createBooking(CreateBookingRequest bookingToCreate) {
-        LOGGER.debug("Create booking: {}", bookingToCreate);
+        LOGGER.info("Create booking: {}", bookingToCreate);
 
         StudioClass studioClass = studioClassService.getByDate(bookingToCreate.date())
                             .orElseThrow(() -> new NoSuchElementException(String.format("No class found at date: %s", bookingToCreate.date().toString())));
@@ -42,6 +42,7 @@ public class BookingService {
         booking.setStudioClass(studioClass);
 
         bookingRepository.save(booking);
+        LOGGER.info("Booking created");
         return bookingMapper.modelToDTO(booking);
     }
 }

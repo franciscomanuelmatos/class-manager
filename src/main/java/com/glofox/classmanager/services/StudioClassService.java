@@ -30,7 +30,7 @@ public class StudioClassService {
     }
 
     public List<StudioClassDTO> createStudioClasses(CreateStudioClassRequest classesToCreateDTO) {
-        LOGGER.debug("CreateStudioClassRequest: {}", classesToCreateDTO);
+        LOGGER.info("CreateStudioClassRequest: {}", classesToCreateDTO);
 
         if (classesToCreateDTO.endDate().isBefore(classesToCreateDTO.startDate())) {
             throw new IllegalArgumentException("endDate cannot be before startDate");
@@ -48,8 +48,8 @@ public class StudioClassService {
             }
         }
 
-        LOGGER.debug("Creating {} classes", classesToCreate.size());
         studioClassRepository.saveAll(classesToCreate);
+        LOGGER.info("Created {} classes", classesToCreate.size());
 
         return classesToCreate.stream()
                             .map(studioClass -> studioClassMapper.modelToDTO(studioClass))
