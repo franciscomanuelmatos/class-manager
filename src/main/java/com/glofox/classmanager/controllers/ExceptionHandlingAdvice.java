@@ -28,7 +28,7 @@ public class ExceptionHandlingAdvice {
     @ExceptionHandler(NoSuchElementException.class)
     protected ResponseEntity<Map<String, String>> handleNoSuchElement(NoSuchElementException exception, WebRequest request) {
         LOGGER.debug("No such element: {}. Request: {}", exception.getMessage(), request);
-        return new ResponseEntity<>(Map.of("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(Map.of("error", exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DateTimeParseException.class)
